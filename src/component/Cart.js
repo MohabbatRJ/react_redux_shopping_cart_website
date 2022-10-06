@@ -3,22 +3,32 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { addCart, deleteCart } from '../redux/action';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function Cart() {
+
+    const forAdd = 'Product Add into Cart'
+    const forDelete = 'Product Delete from Cart'
+    const notify = (value) => {
+        toast(value);
+    }
 
     const state = useSelector((state) => state.handleCart);
     const dispatch = useDispatch();
 
     const handleAdd = (item) => {
         dispatch(addCart(item));
+        notify(forAdd)
     };
     const handleDelete = (item) => {
         dispatch(deleteCart(item));
+        notify(forDelete)
     };
 
     const cartItems = (product) => {
         return (
-            <>
-                <div className='container py-5'>
+                <div className='container py-5' key={product.id}>
                     <div className='row'>
                         <div className='col-md-4'>
                             <img src={product.image} alt={product.title} height="200px" width="180px" />
@@ -39,7 +49,6 @@ export default function Cart() {
                         </div>
                     </div>
                 </div>
-            </>
         )
     }
 
@@ -74,6 +83,7 @@ export default function Cart() {
 
     return (
         <div>
+            <ToastContainer autoClose={1500}/>
             {state.length === 0 && emptyCart()}
             {state.length !== 0 && state.map(cartItems)}
             {state.length !== 0 && buttons()}
