@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton from 'react-loading-skeleton'
 import { useDispatch } from 'react-redux';
 import { addCart } from '../redux/action';
 
@@ -54,12 +53,6 @@ export default function Product() {
                     <Skeleton height={50} width={100} style={{ marginLeft: 6 }} />
                 </div>
             </>
-
-            // <SkeletonTheme color="#202020" highlightColor="#444">
-            //     <section className='col-md-6'>
-            //         <Skeleton height={50} width={50} />
-            //     </section>
-            // </SkeletonTheme>
         )
     }
 
