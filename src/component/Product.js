@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 import { useDispatch } from 'react-redux';
 import { addCart } from '../redux/action';
 
@@ -20,11 +21,11 @@ export default function Product() {
     const addProduct = (product) => {
         dispatch(addCart(product));
         notify();
-        
+
     }
 
     const { id } = useParams();
-    
+
 
     useEffect(() => {
         const getProduct = async () => {
@@ -35,17 +36,16 @@ export default function Product() {
             setLoading(false);
         }
         getProduct();
-    },[]);
+    }, []);
 
     const Loading = () => {
         return (
             <>
-
                 <div className='col-md-6'>
                     <Skeleton height={400} />
                 </div>
                 <div className='col-md-6' style={{ lineHeight: 2 }}>
-                    <Skeleton className='bg-secondary' height={50} width={300} />
+                    <Skeleton height={50} width={300} />
                     <Skeleton height={75} />
                     <Skeleton height={25} width={150} />
                     <Skeleton height={50} />
@@ -54,13 +54,19 @@ export default function Product() {
                     <Skeleton height={50} width={100} style={{ marginLeft: 6 }} />
                 </div>
             </>
+
+            // <SkeletonTheme color="#202020" highlightColor="#444">
+            //     <section className='col-md-6'>
+            //         <Skeleton height={50} width={50} />
+            //     </section>
+            // </SkeletonTheme>
         )
     }
 
     const ShowProduct = () => {
         return (
             <>
-            <ToastContainer autoClose={3000}/>
+                <ToastContainer autoClose={3000} />
                 <div className='col-md-6'>
                     <img src={product.image} alt={product.title} height='400px' width='400px' />
                 </div>
