@@ -30,7 +30,7 @@ export default function Products() {
             }
         }
         getProducts();
-    },[ ]);
+    },[]);
 
     const Loading = () => {
         return (
